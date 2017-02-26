@@ -20,7 +20,7 @@ class User
      * @param $email
      * @param $password
      */
-    public function __construct($username = '' , $email, $password)
+    public function __construct($username = '', $email, $password)
     {
         $this->db = Db::instance();
         $this->username = $username;
@@ -91,12 +91,12 @@ class User
         //$user = User::checkUserExists();
 
 
-       // if (!$user) {
+        // if (!$user) {
         //    $errorsLogin[] = 'Пользователь не найден';
-       // }
+        // }
 
         return $errorsLogin;
-    
+
     }
 
     /**
@@ -107,9 +107,9 @@ class User
      */
     public function checkUserExists($email, $password)
     {
-    
+
         $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-        
+
         $user = $this->db->query($sql, [$email, $password]);
 
         if ($user) {
