@@ -88,12 +88,12 @@ class User
             $errorsLogin[] = 'Введите корректный email';
         }
 
-        //$user = User::checkUserExists();
+        $user = User::checkUserExists();
 
 
-        // if (!$user) {
-        //    $errorsLogin[] = 'Пользователь не найден';
-        // }
+        if (!$user) {
+        $errorsLogin[] = 'Пользователь не найден';
+        }
 
         return $errorsLogin;
 
