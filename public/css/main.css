@@ -1,0 +1,43 @@
+
+html {
+	min-height:100%;
+}
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #404040;
+	text-align: left;
+	font-size: 1em;
+	min-height:100%;
+	background:#f9f9f9;
+}
+.back:hover{
+	text-decoration: none;
+}
+a, #list {
+	color: #28a4c9;
+
+}
+#list:hover {
+	color: #398439;
+	text-decoration:none;
+}
+
+.account input {
+	width:550px;
+	height: 35px;
+}
+h1, h2, h3, h4, h5, h6{
+	font-weight:normal;
+}
+img{
+
+	max-width:100%;
+}
+.clr{
+	clear:both;
+}
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: table;
+}
