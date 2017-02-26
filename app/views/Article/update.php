@@ -26,8 +26,7 @@
 
         <br>
         <div class="container" style="margin-bottom: 40px;"><a href="/article/list" class="btn btn-default back"><i
-                    class="fa fa-arrow-left"></i>
-                Назад</a></div>
+                    class="fa fa-arrow-left"></i>Назад</a></div>
 
     </div>
 </div>
