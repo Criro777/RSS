@@ -29,21 +29,25 @@
             <br>
 
 
-            <?php if(isset($_SESSION['user'])) :  ?>
-            <form class="contact-form" action="/article/add-comment/<?php echo $id  = (\app\models\Comment::getCountComments($articles[0]->article_id))?$articles[0]->article_id : $articles[0]->id?>" method="post">
+            <?php if (isset($_SESSION['user'])) : ?>
+                <form class="contact-form"
+                      action="/article/add-comment/<?php echo $id = (\app\models\Comment::getCountComments($articles[0]->article_id)) ? $articles[0]->article_id : $articles[0]->id ?>"
+                      method="post">
 
-                <div class="form-group">
-                        <textarea placeholder="Ваш комментарий" name = "text" rows="8" style="width:500px;"class="form-control"></textarea>
+                    <div class="form-group">
+                        <textarea placeholder="Ваш комментарий" name="text" rows="8" style="width:500px;"
+                                  class="form-control"></textarea>
                     </div>
 
 
-                <button style="margin-top: 15px;" type="submit" class="btn btn-success" name="Submit">Комментировать
-                </button>
-            </form>
-                <?php else: ?>
+                    <button style="margin-top: 15px;" type="submit" class="btn btn-success" name="Submit">Комментировать
+                    </button>
+                </form>
+            <?php else: ?>
 
-                <p style="text-align: center;font-size: 12pt;"><i>Комментари могут оставлять только зарегестрированные пользователи</i></p>
-                <p style="text-align: center; font-size: 14pt;"><a href = "/user/register">Зарегестрироваться</a></p>
+                <p style="text-align: center;font-size: 12pt;"><i>Комментари могут оставлять только зарегестрированные
+                        пользователи</i></p>
+                <p style="text-align: center; font-size: 14pt;"><a href="/user/register">Зарегестрироваться</a></p>
             <?php endif; ?>
             <hr>
             <?php if (\app\models\Comment::getCountComments($articles[0]->article_id)): ?></h4>
