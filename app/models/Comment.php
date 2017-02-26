@@ -5,7 +5,7 @@ namespace app\models;
 use vendor\core\Db;
 
 
-class Comment 
+class Comment
 {
     protected $db;
     protected $username;
@@ -21,7 +21,7 @@ class Comment
      */
     public function __construct($username, $text, $article_id)
     {
-        
+
         $this->db = Db::instance();
         $this->username = $username;
         $this->text = $text;
@@ -33,12 +33,12 @@ class Comment
      * @param $id <p>Идентификатор статьи</p>
      * @return string <p>Количество найденных комментариев</p>
      */
-    
+
     public static function getCountComments($id)
     {
-      
+
         $sql = "SELECT COUNT(id) AS count FROM  comments WHERE article_id = '$id'";
-        
+
         $result = Db::instance()->query($sql);
 
         return $result[0]->count;
