@@ -53,7 +53,41 @@ class Article
 
 
     }
-    
+
+    /**
+     * Обновление контента в базе данных
+     * @param $id <p>Идентификатор записи</p>
+     */
+
+    public function update($id)
+    {
+        $sql = "UPDATE articles SET title = :title, description = :description WHERE id = '$id'";
+        $this->db->execute($sql, [':title' => $this->title, ':description' => $this->description]);
+
+    }
+
+    /**
+     * Удаление контента из базе данных
+     * @param $id <p>Идентификатор записи</p>
+     */
+
+    public function delete($id)
+    {
+
+        $count_comments = Comment::getCountComments($id);
+
+        if ($count_comments != 0) {
+
+            $sql = "DELETE articles, comments FROM articles  LEFT JOIN comments ON articles.id = comments.article_id WHERE articles.id = '$id'  ";
+
+        } else {
+
+            $sql = "DELETE FROM  articles WHERE id = '$id'";
+        }
+
+        $this->db->execute($sql);
+
+    }
 
     /**
      * Извлечение контента из базы данных
