@@ -133,6 +133,19 @@ class ArticleController extends Controller
 
         }
     }
+    
+    /**
+     * Удаление статьи с заданным идентификатором
+     * @param $id
+     */
+    public function actionDelete($id)
+    {
 
+        $article = new Article();
+
+        $article->delete($id);
+
+        header("Location:/article/list");
+    }
 
 }
