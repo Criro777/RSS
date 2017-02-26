@@ -7,6 +7,7 @@ use vendor\core\Db;
 
 class Comment
 {
+    
     protected $db;
     protected $username;
     protected $text;
@@ -25,7 +26,7 @@ class Comment
         $this->db = Db::instance();
         $this->username = $username;
         $this->text = $text;
-        $this->article_id = $article_id;
+        $this->article_id = $article_id; 
     }
 
     /**
