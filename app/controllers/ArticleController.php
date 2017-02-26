@@ -74,4 +74,65 @@ class ArticleController extends Controller
         header("Location:/article/view/$article_id");
     }
 
+    /**
+     * Отображение списка статей
+     */
+    public function actionList()
+    {
+
+        $articles = Article::findAll();
+
+        $this->render('list', ['articles' => $articles]);
+    }
+
+    /**
+     * Отображение статьи с заданным идентификатором
+     * @param $id
+     */
+
+    public function actionView($id)
+    {
+
+
+        $articles = Article::findOne('id', $id);
+
+        $this->render('view', ['articles' => $articles]);
+
+    }
+
+    /**
+     * Обновление статьи с заданным идентификатором
+     * @param $id
+     */
+    public function actionUpdate($id)
+    {
+
+
+        try {
+
+
+            $articles = Article::findOne('id', $id);
+
+            if (isset($_POST['update'])) {
+
+                $title = $_POST['title'];
+                $description = $_POST['description'];
+
+                $update_article = new Article($title, $description);
+
+                $update_article->update($id);
+
+                header("Location:/article/list");
+
+            }
+
+            $this->render('update', ['articles' => $articles]);
+        } catch (\Exception $e) {
+
+            $this->render('404');
+
+        }
+    }
+
+
 }
