@@ -141,11 +141,14 @@ class Article
 
         $result = Db::instance()->query($sql, [$param]);
 
-        // if ($result) {
+        if ($result) {
 
         return $result;
 
-        //}
+        } else {
+
+            throw new \Exception;
+        }
 
     }
 
