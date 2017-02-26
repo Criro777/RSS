@@ -21,7 +21,7 @@ class UserController extends Controller
             unset($_SESSION['errors']);
 
             if (isset($_POST['register'])) {
-                
+
                 $username = $_POST['username'];
                 $email = $_POST['email'];
                 $password = $_POST['password'];
@@ -43,13 +43,12 @@ class UserController extends Controller
                     header('Location:/user/login');
 
                 }
-                
+
             }
         } else {
             header('Location:/');
 
         }
-
 
     }
 
@@ -84,13 +83,12 @@ class UserController extends Controller
                     header("Location:/user/login");
 
                 }
-                $currentUser = $user->checkUserExists($email,$password);
+                $currentUser = $user->checkUserExists($email, $password);
 
                 $_SESSION['user'] = $currentUser[0]->username;
 
 
-
-               header("Location:/article/list");
+                header("Location:/article/list");
 
 
             }
