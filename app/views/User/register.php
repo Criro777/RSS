@@ -35,9 +35,8 @@
             </form>
 
             <br/>
-            <div class="container" style="margin-top:40px;margin-bottom: 40px;"><a id="back" href="/"><i
-                        class="fa fa-arrow-left"></i>
-                    На Главную</a></div>
+            <div class="container" style="margin-top:40px;margin-bottom: 40px;"><a id="back" href="/article/list"><i
+                        class="fa fa-arrow-left"></i> Назад</a></div>
         </div>
     </div>
 </div>
