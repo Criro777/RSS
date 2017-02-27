@@ -3,7 +3,7 @@
         <div class="col-sm-4">
             <?php if (isset($_SESSION['success'])): ?>
                 <div style="width:550px;text-align: center;" class="alert alert-success">Регистрация прошла успешно!
-                    Войдите под своим именем!
+                    Войдите под своими данными!
                 </div>
             <?php endif; ?>
             <?php if (isset($_SESSION['errors'])): ?>
