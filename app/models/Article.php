@@ -98,7 +98,7 @@ class Article
     {
         $pdo = Db::instance();
 
-        $sql = 'SELECT * FROM  articles ORDER BY PubDate DESC LIMIT 15';
+        $sql = 'SELECT * FROM  articles ORDER BY PubDate DESC LIMIT 25';
         $result = $pdo->query($sql);
 
         return $result;
