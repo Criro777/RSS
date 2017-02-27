@@ -18,7 +18,7 @@
 
     <div class="container">
 
-        <h3>Вывод RSS ленты</h3>
+        <h3>Система обработки RSS-ленты NASA</h3>
         <?php if (!isset($_SESSION['user'])): ?>
         <div style="margin-left: 96%;"><b><a class ="back" href="/user/login">Войти</a></b></div>
         <?php else: ?>
