@@ -90,8 +90,7 @@ class UserController extends Controller
 
                     header("Location:/article/list");
                 }
-
-
+                
             }
 
         } else header('Location:/');
