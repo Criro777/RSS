@@ -2,11 +2,11 @@
     <div style="height: 300px;" class="panel panel-default">
 
         <div class="panel-heading">
-            <h5>Загрузка RSS ленты</h5>
+            <h5>Загрузка RSS-ленты</h5>
         </div>
         <div class="panel-body">
             <button style="margin-top: 15px; width:180px; margin-left:39%; align: center" id="content" type="submit"
-                    class="btn btn-success" name="Submit">Загрузить RSS ленту
+                    class="btn btn-success" name="Submit">Загрузить RSS-ленту
             </button>
 
         </div>
