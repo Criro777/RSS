@@ -39,7 +39,7 @@ class User
 
         $result = $this->db->execute($sql, [':username' => $this->username,
             ':email' => $this->email,
-            ':password' => $this->password]);
+            ':password' => crypt($this->password, "salt")]);
 
         return $result;
 
@@ -84,14 +84,12 @@ class User
 
         $errorsLogin = [];
 
-        if ($this->email = '') {
+        if ($this->email == '') {
             $errorsLogin[] = 'Введите корректный email';
         }
 
-        $user = User::checkUserExists();
 
-
-        if (!$user) {
+        if (!self::checkUserExists()) {
         $errorsLogin[] = 'Пользователь не найден';
         }
 
@@ -105,12 +103,12 @@ class User
      * @param $password <p>Пароль пользователя</p>
      * @return array|bool
      */
-    public function checkUserExists($email, $password)
+    public function checkUserExists()
     {
 
         $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 
-        $user = $this->db->query($sql, [$email, $password]);
+        $user = $this->db->query($sql, [$this->email, crypt($this->password, "salt")]);
 
         if ($user) {
 
