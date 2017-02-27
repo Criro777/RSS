@@ -83,14 +83,14 @@ class UserController extends Controller
                     header("Location:/user/login");
 
                 } else {
-                    $currentUser = $user->checkUserExists($email, $password);
+                    $currentUser = $user->checkUserExists();
 
                     $_SESSION['user'] = $currentUser[0]->username;
 
-
                     header("Location:/article/list");
                 }
-                
+
+
             }
 
         } else header('Location:/');
