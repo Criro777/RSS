@@ -66,7 +66,12 @@ class User
             $errorsRegister[] = 'Пароль не должен быть короче 6-ти символов';
         }
 
-        if (User::checkEmailExists()) {
+        if ($this->email == '') {
+
+            $errorsRegister[] = 'Введите корректный email';
+        }
+
+        if (!User::checkEmailExists()) {
 
             $errorsRegister[] = 'Такой email уже используется';
         }
