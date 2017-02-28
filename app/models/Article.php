@@ -9,11 +9,12 @@ use vendor\core\Db;
 
 class Article
 {
-    protected $title = '';
-    protected $description = '';
-    protected $image_url = '';
-    protected $link = '';
-    protected $pub_date = '';
+    protected $alias;
+    protected $title;
+    protected $description;
+    protected $image_url;
+    protected $link;
+    protected $pub_date;
     protected $db;
 
     /**
@@ -25,9 +26,10 @@ class Article
      * @param string $pub_date
      */
 
-    public function __construct($title = '', $description = '', $image_url = '', $link = '', $pub_date = '')
+    public function __construct($alias = '', $title = '', $description = '', $image_url = '', $link = '', $pub_date = '')
     {
         $this->db = Db::instance();
+        $this->alias = $alias;
         $this->title = $title;
         $this->description = $description;
         $this->image_url = $image_url;
@@ -42,15 +44,15 @@ class Article
     {
 
 
-        $sql = "INSERT INTO articles (title,description, image_url,link,PubDate,UploadDate) 
-                          VALUES (:title, :description, :image_url, :link, :pub_date, NOW())";
+        $sql = "INSERT INTO articles (alias, title,description, image_url,link,PubDate,UploadDate) 
+                          VALUES (:alias, :title, :description, :image_url, :link, :pub_date, NOW())";
 
-        $this->db->execute($sql, [':title' => $this->title,
-            ':description' => $this->description,
-            'image_url' => $this->image_url,
-            'link' => $this->link,
-            'pub_date' => $this->pub_date]);
-
+        $this->db->execute($sql, [':alias' => $this->alias,
+                                  ':title' => $this->title,
+                                  ':description' => $this->description,
+                                  'image_url' => $this->image_url,
+                                  'link' => $this->link,
+                                  'pub_date' => $this->pub_date]);
 
     }
 
@@ -59,9 +61,9 @@ class Article
      * @param $id <p>Идентификатор записи</p>
      */
 
-    public function update($id)
+    public function update($alias)
     {
-        $sql = "UPDATE articles SET title = :title, description = :description WHERE id = '$id'";
+        $sql = "UPDATE articles SET title = :title, description = :description WHERE alias = '$alias'";
         $this->db->execute($sql, [':title' => $this->title, ':description' => $this->description]);
 
     }
@@ -71,18 +73,18 @@ class Article
      * @param $id <p>Идентификатор записи</p>
      */
 
-    public function delete($id)
+    public function delete($alias)
     {
 
-        $count_comments = Comment::getCountComments($id);
+        $count_comments = Comment::getCountComments($alias);
 
         if ($count_comments != 0) {
 
-            $sql = "DELETE articles, comments FROM articles  LEFT JOIN comments ON articles.id = comments.article_id WHERE articles.id = '$id'  ";
+            $sql = "DELETE articles, comments FROM articles  LEFT JOIN comments ON articles.alias = comments.article_alias WHERE articles.alias = '$alias'  ";
 
         } else {
 
-            $sql = "DELETE FROM  articles WHERE id = '$id'";
+            $sql = "DELETE FROM  articles WHERE alias = '$alias'";
         }
 
         $this->db->execute($sql);
@@ -94,17 +96,30 @@ class Article
      * @return array <p>Массив объектов из базы данных</p>
      * @throws \Exception <p>Объект исключения</p>
      */
-    public static function findAll()
+    public static function findAll($start_pos)
     {
+        
         $pdo = Db::instance();
 
-        $sql = 'SELECT * FROM  articles ORDER BY PubDate DESC LIMIT 25';
+        $sql = "SELECT * FROM  articles ORDER BY PubDate DESC LIMIT 5 OFFSET {$start_pos} ";
         $result = $pdo->query($sql);
 
         return $result;
 
     }
 
+    public static function getCountItems()
+    {
+
+        $pdo = Db::instance();
+
+        $sql = 'SELECT COUNT(id) AS count FROM  articles';
+        $result = $pdo->query($sql);
+
+        return $result[0]->count;
+
+    }
+    
     /**
      * Поиск контента в базе данных по заданному полю и параметру
      * @param $field <p> Поле в теаблиц базы данных</p>
@@ -130,7 +145,7 @@ class Article
         if ($count_comments != 0) {
 
             //Если комментарии присутствуют, используем сложный запрос для выборки из 2-х таблиц
-            $sql = "SELECT * FROM articles JOIN comments ON  articles.{$field} = comments.article_id WHERE articles.{$field} = ?";
+            $sql = "SELECT * FROM articles JOIN comments ON  articles.{$field} = comments.article_alias WHERE articles.{$field} = ?";
 
         } else {
 
