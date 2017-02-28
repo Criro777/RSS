@@ -20,13 +20,13 @@ class Comment
      * @param $text
      * @param $article_id
      */
-    public function __construct($username, $text, $article_id)
+    public function __construct($username, $text, $article_alias)
     {
 
         $this->db = Db::instance();
         $this->username = $username;
         $this->text = $text;
-        $this->article_id = $article_id; 
+        $this->article_alias = $article_alias;
     }
 
     /**
@@ -35,10 +35,10 @@ class Comment
      * @return string <p>Количество найденных комментариев</p>
      */
 
-    public static function getCountComments($id)
+    public static function getCountComments($alias)
     {
 
-        $sql = "SELECT COUNT(id) AS count FROM  comments WHERE article_id = '$id'";
+        $sql = "SELECT COUNT(id) AS count FROM  comments WHERE article_alias = '$alias'";
 
         $result = Db::instance()->query($sql);
 
@@ -52,12 +52,12 @@ class Comment
     {
 
 
-        $sql = "INSERT INTO comments (username, text, article_id) 
+        $sql = "INSERT INTO comments (username, text, article_alias) 
                           VALUES (:username, :text, :article_id)";
 
         $this->db->execute($sql, [':username' => $this->username,
             ':text' => $this->text,
-            'article_id' => $this->article_id]);
+            'article_id' => $this->article_alias]);
 
 
     }
