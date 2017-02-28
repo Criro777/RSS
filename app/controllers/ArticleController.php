@@ -5,11 +5,12 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Comment;
+use vendor\components\Translit;
 use vendor\core\engine\Controller;
 
 class ArticleController extends Controller
 {
-    
+
     public function actionIndex()
     {
         $this->render('index');
@@ -32,12 +33,13 @@ class ArticleController extends Controller
         foreach ($rss->channel->item as $item) {
 
             $title = $item->title;
+            $alias = Translit::str2url($title);
             $link = $item->link;
             $description = $item->description;
             $image_url = $item->enclosure->attributes()->url;
             $pub_date = date('Y-m-d G:i:s', strtotime($item->pubDate));
 
-            $article = new Article($title, $description, $image_url, $link, $pub_date);
+            $article = new Article($alias, $title, $description, $image_url, $link, $pub_date);
 
             //Проверяем наличие записи в базе данных
             $result = $article->findUnique('title', $title);
@@ -46,8 +48,6 @@ class ArticleController extends Controller
 
                 //если совпадений нет, производим запись
                 $article->save();
-
-                //$loaded = true;
 
             }
 
@@ -59,7 +59,7 @@ class ArticleController extends Controller
      * Добавление комментария
      * @param $article_id <p>Идентификатор статьи</p>
      */
-    public function actionAddComment($article_id)
+    public function actionAddComment($article_alias)
     {
 
         $username = $_SESSION['user'];
@@ -67,34 +67,77 @@ class ArticleController extends Controller
 
         //var_dump($article_id);
 
-        $comment = new Comment($username, $text, $article_id);
+        $comment = new Comment($username, $text, $article_alias);
 
         $comment->saveComment();
 
-        header("Location:/article/view/$article_id");
+        header("Location:/article/view/$article_alias");
     }
 
     /**
      * Отображение списка статей
      */
-    public function actionList()
+    public function actionList($page)
     {
 
-        $articles = Article::findAll();
+        if (!isset($page) or $page == 0) {
+            
+            $page = 1;
+        }
 
-        $this->render('list', ['articles' => $articles]);
+        //Количество товаров на странице
+        $page_items = 5;
+
+        //общее количество статей
+        $total_items = Article::getCountItems();
+
+        //необходимое количество страниц
+        $count_pages = ceil($total_items / $page_items);
+
+        if ($count_pages == 0) {
+
+            $count_pages = 1;
+        }
+
+        //получение запрошенной страницы
+        //if(isset($_GET['page'])){
+
+        //     $page = (int)$_GET['page'];
+        //    if($page < 1 ) $page = 1;
+
+        // } else {
+
+        //   $page = 1;
+        // }
+
+        if ($page > $count_pages) {
+
+            $page = $count_pages;
+        }
+
+        $start_pos = ($page - 1) * $page_items;
+
+
+        $articles = Article::findAll($start_pos);
+
+        $p = new \Pagination($total_items, $page, $page_items);
+        $pagination = $p->get();
+
+        //$pagination = Article::pagination($page, $count_pages);
+
+        $this->render('list', ['articles' => $articles, 'pagination' => $pagination]);
     }
 
     /**
-     * Отображение статьи с заданным идентификатором
-     * @param $id
+     * Отображение статьи с заданным
+     * @param $alias
      */
 
-    public function actionView($id)
+    public function actionView($alias)
     {
 
 
-        $articles = Article::findOne('id', $id);
+        $articles = Article::findOne('alias', $alias);
 
         $this->render('view', ['articles' => $articles]);
 
@@ -104,23 +147,23 @@ class ArticleController extends Controller
      * Обновление статьи с заданным идентификатором
      * @param $id
      */
-    public function actionUpdate($id)
+    public function actionUpdate($alias)
     {
 
 
         try {
 
 
-            $articles = Article::findOne('id', $id);
+            $articles = Article::findOne('alias', $alias);
 
             if (isset($_POST['update'])) {
 
                 $title = $_POST['title'];
                 $description = $_POST['description'];
 
-                $update_article = new Article($title, $description);
+                $update_article = new Article('',$title, $description);
 
-                $update_article->update($id);
+                $update_article->update($alias);
 
                 header("Location:/article/list");
 
@@ -133,17 +176,17 @@ class ArticleController extends Controller
 
         }
     }
-    
+
     /**
      * Удаление статьи с заданным идентификатором
      * @param $id
      */
-    public function actionDelete($id)
+    public function actionDelete($alias)
     {
 
         $article = new Article();
 
-        $article->delete($id);
+        $article->delete($alias);
 
         header("Location:/article/list");
     }
