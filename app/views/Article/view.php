@@ -25,13 +25,13 @@
             <hr>
             <br>
 
-            <h4>Комментарии: <?php echo \app\models\Comment::getCountComments($articles[0]->article_id); ?></h4>
+            <h4>Комментарии: <?php echo \app\models\Comment::getCountComments($articles[0]->article_alias); ?></h4>
             <br>
 
 
             <?php if (isset($_SESSION['user'])) : ?>
                 <form class="contact-form"
-                      action="/article/add-comment/<?php echo $id = (\app\models\Comment::getCountComments($articles[0]->article_id)) ? $articles[0]->article_id : $articles[0]->id ?>"
+                      action="/article/add-comment/<?php echo $articles[0]->alias?>"
                       method="post">
 
                     <div class="form-group">
@@ -50,7 +50,7 @@
                 <p style="text-align: center; font-size: 14pt;"><a href="/user/register">Зарегестрироваться</a></p>
             <?php endif; ?>
             <hr>
-            <?php if (\app\models\Comment::getCountComments($articles[0]->article_id)): ?></h4>
+            <?php if (\app\models\Comment::getCountComments($articles[0]->article_alias)): ?></h4>
             <div class="comments">
                 <?php foreach ($articles as $article): ?>
                     <div style="width:500px;" class="alert alert-info">

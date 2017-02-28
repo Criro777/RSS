@@ -13,11 +13,11 @@
         <?php foreach ($articles as $article): ?>
             <tr>
                 <td><?php echo $article->id; ?></td>
-                <td><a id= "list"href="/article/view/<?php echo $article->id; ?>"><?php echo $article->title; ?></a></td>
+                <td><a id= "list"href="/article/view/<?php echo $article->alias; ?>"><?php echo $article->title; ?></a></td>
                 <td><a  href="<?php echo $article->link; ?>"><?php echo $article->PubDate; ?></a></td>
                 <td><?php echo $article->UploadDate; ?></td>
-                <td><?php echo \app\models\Comment::getCountComments($article->id);?></td>
-                <td><a href="/article/update/<?php echo $article->id; ?>" title="Редактировать"><i
+                <td><?php echo \app\models\Comment::getCountComments($article->alias);?></td>
+                <td><a href="/article/update/<?php echo $article->alias; ?>" title="Редактировать"><i
                             class="fa fa-pencil-square-o"></i></a></td>
                 <td><a href="#" data-toggle="modal" data-target="#<?php echo $article->id; ?>"><i
                             class="fa fa-trash-o"></i></a>
@@ -28,7 +28,7 @@
                                     <h3>Вы действительно хотите удалить эту новость ?</h3>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="/article/delete/<?php echo $article->id; ?>"
+                                    <a href="/article/delete/<?php echo $article->alias; ?>"
                                        class="btn btn-default  btn-success">Удалить</a>
                                     <a class="btn btn-default btn-danger" data-dismiss="modal">Отмена</a>
                                 </div>
@@ -39,6 +39,8 @@
             </tr>
         <?php endforeach; ?>
     </table>
+
+<div style="margin: 20px; text-align: center;"><?=$pagination ?></div>
 
 <div class="container" style="margin-top:40px;margin-bottom: 40px;"><a id ="back" href="/" ><i
             class="fa fa-arrow-left"></i> На Главную</a></div>

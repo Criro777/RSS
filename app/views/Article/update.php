@@ -4,7 +4,7 @@
     <div class="panel-body">
 
 
-        <form action="/article/update/<?php echo $articles[0]->id ?>" method="post">
+        <form action="/article/update/<?php echo $articles[0]->alias ?>" method="post">
 
             <fieldset>
                 <label for='title'><h4>Title:</h4></label>
