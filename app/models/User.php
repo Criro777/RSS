@@ -71,7 +71,7 @@ class User
             $errorsRegister[] = 'Введите корректный email';
         }
 
-        if (!User::checkEmailExists()) {
+        if (User::checkEmailExists()) {
 
             $errorsRegister[] = 'Такой email уже используется';
         }
