@@ -12,27 +12,48 @@
 
             <?php endif; ?>
 
+            <div class="hidden" id="#msgSubmit"></div>
             <div class="signup-form"><!--sign up form-->
                 <h2>Регистрация нового пользователя</h2>
                 <br>
 
             </div><!--/sign up form-->
 
-            <form class="account" action="/user/register" method="post">
-                <div class="form-group">
-                    <input type="text" name="username" placeholder="Имя"/>
+            <form id="account" action="/user/register"  method="post" data-toggle="validator">
+
+                <div class="form-group has-feedback">
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" type="text" id="username" name="username" placeholder="Имя" required>
+                    </div>
+                    <span class="glyphicon form-control-feedback "></span>
                 </div>
 
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="E-мэйл"/>
+
+
+                    <div class="form-group has-feedback">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input class="form-control" type="email" name="email"  placeholder="E-мэйл" required>
+                    </div>
+                    <span class="glyphicon form-control-feedback "></span>
                 </div>
 
-                <div class="form-group">
-                    <input type="password" name="password" placeholder="Пароль"/>
+
+
+                <div class="form-group has-feedback">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
+                        <input class="form-control" type="password" name="password" placeholder="Пароль" required>
+                    </div>
+                    <span class="glyphicon form-control-feedback "></span>
+
                 </div>
 
                 <button type="submit" name="register" class="btn btn-success">Зарегестрироваться</button>
             </form>
+
 
             <br/>
             <div class="container" style="margin-top:40px;margin-bottom: 40px;"><a id="back" href="/article/list"><i
