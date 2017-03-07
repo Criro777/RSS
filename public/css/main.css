@@ -10,6 +10,16 @@ body {
 	min-height:100%;
 	background:#f9f9f9;
 }
+
+.has-feedback{
+
+	width:430px;
+}
+.form-control-feedback{
+	right:9px;
+
+}
+
 .back:hover{
 	text-decoration: none;
 }
@@ -22,9 +32,9 @@ a, #list {
 	text-decoration:none;
 }
 
-.account input {
-	width:550px;
-	height: 35px;
+#account input {
+	width:400px;
+	height: 40px;
 }
 h1, h2, h3, h4, h5, h6{
 	font-weight:normal;
