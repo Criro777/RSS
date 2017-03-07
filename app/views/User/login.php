@@ -15,12 +15,12 @@
             <?php endif; ?>
             <div class="login-form"><!--login form-->
                 <h2>Вход</h2>
-                <form class="account" action="/user/login" method="post">
+                <form id="account" action="/user/login" method="post" data-toggle="validator">
                     <div class="form-group">
-                        <input type="email" name="email" required placeholder="E-мэйл"/>
+                        <input type="email" class="form-control" name="email" placeholder="E-мэйл" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" required placeholder="Пароль"/>
+                        <input type="password" class="form-control" name="password" placeholder="Пароль" required>
                     </div>
 
                     <button type="submit" name="login" class="btn btn-success">Войти</button>
