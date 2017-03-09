@@ -1,9 +1,13 @@
-$(document).ready(function () {
 
+$(document).ready(function () {
     $("#msgSubmit").hide();
     $("#view").hide();
 
+
 });
+
+
+
 
 $("#content").click(function () {
 
@@ -20,5 +24,3 @@ $("#content").click(function () {
 
 
 });
-
-
