@@ -129,7 +129,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Отображение статьи с заданным
+     * Отображение статьи с заданным алиасом
      * @param $alias
      */
 
@@ -144,8 +144,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * Обновление статьи с заданным идентификатором
-     * @param $id
+     * Обновление статьи с заданным алиасом
+     * @param $alias
      */
     public function actionUpdate($alias)
     {
@@ -170,16 +170,17 @@ class ArticleController extends Controller
             }
 
             $this->render('update', ['articles' => $articles]);
+            
         } catch (\Exception $e) {
 
-            $this->render('404');
+            header("Location:/public/404.html");
 
         }
     }
 
     /**
-     * Удаление статьи с заданным идентификатором
-     * @param $id
+     * Удаление статьи с заданным алиасом
+     * @param $alias
      */
     public function actionDelete($alias)
     {
