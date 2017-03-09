@@ -69,30 +69,35 @@ class Router
     public static function dispatch($url)
     {
         $url = self::removeQueryString($url);
+        
         try {
+            
             if (self::matchRoute($url)) {
 
                 $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
+                
                 if (class_exists($controller)) {
+                    
                     $cObj = new $controller(self::$route);
                     $action = 'action' . self::upperCamelCase(self::$route['action']);
                     $parameters = self::$route['parameter'];
+                    
                     if (method_exists($cObj, $action)) {
+                        
                         $cObj->$action($parameters);
                     } else {
-                        throw new \Exception();
+                        
+                        throw new  \Exception();
                     }
+                    
                 } else {
-                    throw new \Exception();
+                    
+                    throw new  \Exception();
                 }
             }
         } catch (\Exception $e) {
-
-            //http_response_code(404);
-
-            header("Location:/public/404.html");
-  
             
+            header("Location:/public/404.html");
         }
 
     }
