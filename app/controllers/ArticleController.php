@@ -98,18 +98,7 @@ class ArticleController extends Controller
 
             $count_pages = 1;
         }
-
-        //получение запрошенной страницы
-        //if(isset($_GET['page'])){
-
-        //     $page = (int)$_GET['page'];
-        //    if($page < 1 ) $page = 1;
-
-        // } else {
-
-        //   $page = 1;
-        // }
-
+        
         if ($page > $count_pages) {
 
             $page = $count_pages;
