@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MAIN</title>
+        <link href="/public/font-awesome/css/font-awesome.min.css"  type="text/css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/public/css/main.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         
@@ -28,6 +29,7 @@
 
         <script type="text/javascript" src="/public/js/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="/public/js/validator.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/public/js/main.js"></script>
     </body>
 </html>
