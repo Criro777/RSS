@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL,
   `username` varchar(25) NOT NULL,
   `text` text NOT NULL,
-  `article_id` int(11) NOT NULL
+  `article_alias` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
